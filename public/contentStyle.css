@@ -1,0 +1,2186 @@
+/* ===========================
+   NGA Alpha - Theme Variables
+   =========================== */
+
+:root,
+:root[data-nga-theme="light"] {
+  --nga-bg: #f0f2f5;
+  --nga-card-bg: #ffffff;
+  --nga-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --nga-card-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.08);
+  --nga-text-primary: #1a1a1a;
+  --nga-text-secondary: #6b7280;
+  --nga-text-tertiary: #9ca3af;
+  --nga-text-link: #2563eb;
+  --nga-text-link-hover: #1d4ed8;
+  --nga-border: #e5e7eb;
+  --nga-nav-bg: rgba(255, 255, 255, 0.88);
+  --nga-nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --nga-tag-red-bg: #fee2e2;
+  --nga-tag-red-text: #dc2626;
+  --nga-tag-blue-bg: #dbeafe;
+  --nga-tag-blue-text: #2563eb;
+  --nga-tag-green-bg: #dcfce7;
+  --nga-tag-green-text: #16a34a;
+  --nga-tag-purple-bg: #f3e8ff;
+  --nga-tag-purple-text: #9333ea;
+  --nga-tag-gray-bg: #f3f4f6;
+  --nga-tag-gray-text: #6b7280;
+  --nga-avatar-bg: #e0e7ff;
+  --nga-avatar-text: #4f46e5;
+  --nga-toolbar-bg: rgba(255, 255, 255, 0.95);
+  --nga-toolbar-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  --nga-divider: #f0f0f0;
+}
+
+:root[data-nga-theme="dark"] {
+  --nga-bg: #16161e;
+  --nga-card-bg: #1e1e2e;
+  --nga-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+  --nga-card-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --nga-text-primary: #e8e8ed;
+  --nga-text-secondary: #a0a0b0;
+  --nga-text-tertiary: #606070;
+  --nga-text-link: #60a5fa;
+  --nga-text-link-hover: #93bbfd;
+  --nga-border: #2a2a3a;
+  --nga-nav-bg: rgba(22, 22, 30, 0.92);
+  --nga-nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --nga-tag-red-bg: rgba(220, 38, 38, 0.15);
+  --nga-tag-red-text: #f87171;
+  --nga-tag-blue-bg: rgba(37, 99, 235, 0.15);
+  --nga-tag-blue-text: #60a5fa;
+  --nga-tag-green-bg: rgba(22, 163, 74, 0.15);
+  --nga-tag-green-text: #4ade80;
+  --nga-tag-purple-bg: rgba(147, 51, 234, 0.15);
+  --nga-tag-purple-text: #c084fc;
+  --nga-tag-gray-bg: rgba(107, 114, 128, 0.15);
+  --nga-tag-gray-text: #9ca3af;
+  --nga-avatar-bg: rgba(79, 70, 229, 0.2);
+  --nga-avatar-text: #818cf8;
+  --nga-toolbar-bg: rgba(30, 30, 46, 0.95);
+  --nga-toolbar-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  --nga-divider: #2a2a3a;
+}
+
+/* Hide coin icons (gold/silver/copper) */
+img[src*="g.gif"],
+img[src*="s.gif"],
+img[src*="c.gif"] {
+  display: none !important;
+}
+
+/* ===========================
+   Global Page Override
+   =========================== */
+
+body {
+  background: var(--nga-bg) !important;
+  color: var(--nga-text-primary) !important;
+}
+
+/* ===========================
+   Hide Unwanted Elements
+   =========================== */
+
+#m_ads,
+#m_footer,
+#footer,
+.adbox,
+#toptopics + .clear,
+body > .clear,
+#m_threads .drow,
+.forumbox .block_txt_c2 ~ div[style*="background"],
+iframe[src*="ad"],
+div[id*="ad_"],
+div[class*="advertisement"] {
+  display: none !important;
+}
+
+/* Homepage ad banner only */
+.indexblock .headline,
+#indexBlockother .headline,
+#indexBlockother #toptopics {
+  display: none !important;
+}
+
+/* ===========================
+   Sticky Navigation (.stdbtn)
+   =========================== */
+
+/* Top bar container — sticky + glassmorphism (div.stdbtn = nav, table.stdbtn = buttons) */
+div.stdbtn {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9990 !important;
+  background: var(--nga-nav-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: var(--nga-nav-shadow) !important;
+  border-bottom: 1px solid var(--nga-border) !important;
+  border-radius: 0 !important;
+}
+
+div.stdbtn > .innerbg {
+  background: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+  min-height: 48px !important;
+  border: none !important;
+}
+
+/* Nav items layout */
+div.stdbtn .innerbg > div:not(.right):not(.clear) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  flex: 1 !important;
+}
+
+div.stdbtn .innerbg > .right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  order: 2 !important;
+}
+
+/* Hide .clear divs */
+div.stdbtn .clear {
+  display: none !important;
+}
+
+/* Nav link cells */
+div.stdbtn .td {
+  display: inline-flex !important;
+  align-items: center !important;
+  float: none !important;
+}
+
+/* Nav links — clean pill style */
+div.stdbtn .mmdefault {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--nga-text-secondary) !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+  border: none !important;
+  background: transparent !important;
+  white-space: nowrap !important;
+}
+
+div.stdbtn .mmdefault:hover {
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-primary) !important;
+}
+
+div.stdbtn .mmdefault.active {
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+  font-weight: 600 !important;
+}
+
+/* Right-side items (登录/消息/开始) — slightly muted */
+div.stdbtn .right .mmdefault.gray,
+div.stdbtn .right .mmdefault.invert.gray {
+  font-size: 12px !important;
+  color: var(--nga-text-tertiary) !important;
+}
+
+div.stdbtn .right .mmdefault.gray:hover,
+div.stdbtn .right .mmdefault.invert.gray:hover {
+  color: var(--nga-text-primary) !important;
+  background: var(--nga-tag-gray-bg) !important;
+}
+
+/* Logo SVG — scale down and theme-aware */
+div.stdbtn .mmdefault svg.iconfont {
+  height: 28px !important;
+  fill: var(--nga-text-primary) !important;
+  transition: fill 0.15s ease !important;
+}
+
+/* Hide external promo links to simplify nav */
+div.stdbtn .td a[href*="bigfoot.178.com"],
+div.stdbtn .td a[href*="bigfootgames.178.com"],
+div.stdbtn .td a[href*="ngastore"],
+div.stdbtn .td a[href*="app.nga.cn"] {
+  display: none !important;
+}
+
+/* Breadcrumb / sub-nav */
+#m_nav,
+.nav {
+  background: transparent !important;
+  max-width: 1200px !important;
+  margin: 4px auto !important;
+  padding: 6px 16px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+}
+
+.nav .nav_root_c {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.nav .nav_root {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  color: var(--nga-text-tertiary) !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  background: var(--nga-tag-gray-bg) !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+}
+
+.nav .nav_root:hover {
+  color: var(--nga-text-primary) !important;
+  background: var(--nga-border) !important;
+}
+
+/* Breadcrumb separator */
+.nav .nav_spr {
+  color: var(--nga-text-tertiary) !important;
+  margin: 0 6px !important;
+  font-size: 11px !important;
+}
+
+.nav .nav_spr span {
+  color: var(--nga-text-tertiary) !important;
+}
+
+/* Breadcrumb links — pill button style */
+.nav .nav_link {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 4px 12px !important;
+  border-radius: 6px !important;
+  color: var(--nga-text-link) !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  background: var(--nga-tag-blue-bg) !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+}
+
+.nav .nav_link:hover {
+  color: var(--nga-text-link-hover) !important;
+  background: color-mix(in srgb, var(--nga-tag-blue-bg) 80%, var(--nga-tag-blue-text)) !important;
+}
+
+/* Don't show display:none links */
+.nav .nav_link[style*="display: none"] {
+  display: none !important;
+}
+
+/* Hide clear divs */
+.nav .clear {
+  display: none !important;
+}
+
+/* Bookmark/pin icon on breadcrumb links */
+.nav .hovernoline {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 2px !important;
+  opacity: 0.35 !important;
+  transition: opacity 0.15s ease !important;
+}
+
+.nav .hovernoline:hover {
+  opacity: 0.8 !important;
+}
+
+.nav .hovernoline svg.iconfont {
+  height: 0.85em !important;
+  fill: var(--nga-text-tertiary) !important;
+  transition: fill 0.15s ease !important;
+}
+
+.nav .hovernoline:hover svg.iconfont {
+  fill: var(--nga-text-link) !important;
+}
+
+#m_nav a {
+  color: var(--nga-text-link) !important;
+  text-decoration: none !important;
+}
+
+/* ===========================
+   Sub-forums / Category Links (.catenew)
+   =========================== */
+
+.catenew,
+#sub_forums {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 8px 16px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  overflow: hidden !important;
+}
+
+/* Category section title */
+.catenew h2.catetitle {
+  width: 100% !important;
+  margin: 16px 0 4px !important;
+  padding: 0 4px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--nga-text-primary) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Each sub-forum item — card style matching thread rows */
+#sub_forums > div[name="fbk"] {
+  width: calc(25% - 6px) !important;
+  float: none !important;
+  background-image: none !important;
+  background: var(--nga-card-bg) !important;
+  border: 1px solid var(--nga-border) !important;
+  border-radius: 12px !important;
+  padding: 14px 18px !important;
+  box-shadow: var(--nga-card-shadow) !important;
+  transition: box-shadow 0.2s ease, transform 0.15s ease !important;
+  box-sizing: border-box !important;
+}
+
+#sub_forums > div[name="fbk"]:hover {
+  box-shadow: var(--nga-card-hover-shadow) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Reset inner wrappers */
+#sub_forums .a,
+#sub_forums .b {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Sub-forum link */
+#sub_forums a {
+  color: var(--nga-text-link) !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+#sub_forums a:hover {
+  color: var(--nga-text-link-hover) !important;
+}
+
+/* Hide checkbox toggle & line break */
+#sub_forums p,
+#sub_forums br {
+  display: none !important;
+}
+
+/* ===========================
+   Forum Category Grid (.mol cards)
+   =========================== */
+
+/* Grid container */
+.catenew .b4,
+.catenew .b3,
+.catenew .b2 {
+  background-color: var(--nga-card-bg) !important;
+  background-size: 32px 32px !important;
+  background-repeat: no-repeat !important;
+  background-position: 14px center !important;
+  border: 1px solid var(--nga-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--nga-card-shadow) !important;
+  transition: box-shadow 0.2s ease, transform 0.15s ease !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  float: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 14px 18px 14px 56px !important;
+  margin: 4px !important;
+  width: calc(33.333% - 10px) !important;
+  min-height: 60px !important;
+  height: auto !important;
+}
+
+.catenew .b4:hover,
+.catenew .b3:hover,
+.catenew .b2:hover {
+  box-shadow: var(--nga-card-hover-shadow) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Reset inner wrappers */
+.catenew .b4 .a,
+.catenew .b4 .b,
+.catenew .b3 .a,
+.catenew .b3 .b,
+.catenew .b2 .a,
+.catenew .b2 .b {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Forum title link */
+.catenew .mol a.uitxt1 {
+  color: var(--nga-text-link) !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: color 0.15s !important;
+}
+
+.catenew .mol a.uitxt1:hover {
+  color: var(--nga-text-link-hover) !important;
+}
+
+/* Forum description */
+.catenew .mol p {
+  color: var(--nga-text-tertiary) !important;
+  font-size: 12px !important;
+  margin: 2px 0 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Hide line breaks between title and description */
+.catenew .mol .b br {
+  display: none !important;
+}
+
+/* ===========================
+   Content Block (Board Header / Pinned Area)
+   =========================== */
+
+.contentBlock {
+  max-width: 1200px !important;
+  margin: 12px auto !important;
+  padding: 0 !important;
+  background: var(--nga-card-bg) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--nga-border) !important;
+  box-shadow: var(--nga-card-shadow) !important;
+  overflow: hidden !important;
+}
+
+/* Content blocks inside category grid */
+.catenew .contentBlock {
+  margin: 4px !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Cards inside contentBlock — fill the container */
+.contentBlock .b4,
+.contentBlock .b3,
+.contentBlock .b2 {
+  width: calc(50% - 10px) !important;
+}
+
+/* Board title bar */
+.contentBlock > h3 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 14px 18px !important;
+  margin: 0 !important;
+  background: var(--nga-card-bg) !important;
+  border-bottom: 1px solid var(--nga-border) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--nga-text-primary) !important;
+}
+
+.contentBlock > h3 > a.block_txt_c0 {
+  display: inline-block !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 3px 10px !important;
+  border-radius: 6px !important;
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+.contentBlock > h3 > a:not(.block_txt_c0) {
+  color: var(--nga-text-primary) !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* Pinned post content area */
+.contentBlock .postrow {
+  display: block !important;
+  overflow-x: auto !important;
+  padding: 14px 18px !important;
+  border-bottom: 1px solid var(--nga-border) !important;
+}
+
+/* Tables inside content block */
+.contentBlock .tablecontainer {
+  margin: 0 !important;
+}
+
+.contentBlock .tablespacer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.contentBlock table {
+  border-collapse: collapse !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+.contentBlock td {
+  background: transparent !important;
+  padding: 8px !important;
+  border: none !important;
+  border-bottom: 1px solid var(--nga-divider) !important;
+  vertical-align: top !important;
+  color: var(--nga-text-primary) !important;
+}
+
+.contentBlock td:not(:last-child) {
+  border-right: 1px solid var(--nga-divider) !important;
+}
+
+/* Override inline colored text for theme compatibility */
+.contentBlock .darkblue,
+.contentBlock .skyblue,
+.contentBlock .limegreen,
+.contentBlock .sandybrown,
+.contentBlock .deeppink,
+.contentBlock .purple,
+.contentBlock .orange,
+.contentBlock .red,
+.contentBlock .blue,
+.contentBlock .green,
+.contentBlock .sienna,
+.contentBlock .indigo,
+.contentBlock .chocolate {
+  color: var(--nga-text-link) !important;
+}
+
+.contentBlock .silver {
+  color: var(--nga-text-tertiary) !important;
+}
+
+/* Links inside content block */
+.contentBlock a.urlincontent {
+  color: var(--nga-text-link) !important;
+  text-decoration: none !important;
+}
+
+.contentBlock a.urlincontent:hover {
+  color: var(--nga-text-link-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* Hide URL tooltip spans */
+.contentBlock .urltip {
+  display: none !important;
+}
+
+/* Bracket decorations — muted */
+.contentBlock .apd {
+  color: var(--nga-border) !important;
+}
+
+/* Quick view buttons [R] [T] */
+.contentBlock a.block_txt_c0 {
+  display: inline-block !important;
+  font-size: 10px !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-tag-gray-text) !important;
+  text-decoration: none !important;
+  margin-left: 4px !important;
+  vertical-align: middle !important;
+}
+
+/* Images inside content block */
+.contentBlock img:not([src="about:blank"]) {
+  border-radius: 8px !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+}
+
+/* Custom scrollbar for the pinned content */
+.contentBlock .postrow::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contentBlock .postrow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.contentBlock .postrow::-webkit-scrollbar-thumb {
+  background: var(--nga-border);
+  border-radius: 3px;
+}
+
+.contentBlock .postrow::-webkit-scrollbar-thumb:hover {
+  background: var(--nga-text-tertiary);
+}
+
+/* ===========================
+   Thread List Card Layout
+   =========================== */
+
+/* Page container */
+#m_threads,
+.forumbox {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  max-width: 1200px;
+  margin: 0 auto !important;
+  padding: 8px 16px !important;
+}
+
+/* Table reset */
+#topicrows,
+#m_threads_c,
+.topicrows {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+/* Hide table header row */
+#topicrows thead,
+#m_threads_c thead,
+.topicrows thead,
+.forumbox .block_txt_c0,
+.forumbox .block_txt_c2 {
+  display: none !important;
+}
+
+/* ── Thread row → card ── */
+tr.topicrow {
+  display: grid !important;
+  grid-template-columns: 1fr auto !important;
+  grid-template-rows: auto auto !important;
+  gap: 0 !important;
+  background: var(--nga-card-bg) !important;
+  border-radius: 12px !important;
+  margin-bottom: 8px !important;
+  padding: 14px 18px !important;
+  box-shadow: var(--nga-card-shadow) !important;
+  border: 1px solid var(--nga-border) !important;
+  transition: box-shadow 0.2s ease, transform 0.15s ease !important;
+}
+
+tr.topicrow:hover {
+  box-shadow: var(--nga-card-hover-shadow) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* All cells reset */
+tr.topicrow > td {
+  display: block !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  float: none !important;
+  width: auto !important;
+}
+
+/* ── c2: Title — top left, spans most of the width ── */
+tr.topicrow > .c2 {
+  grid-column: 1 / 2 !important;
+  grid-row: 1 !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  margin-bottom: 8px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Thread title link */
+tr.topicrow .c2 a.topic {
+  color: var(--nga-text-primary) !important;
+  text-decoration: none !important;
+  transition: color 0.15s ease !important;
+}
+
+tr.topicrow .c2 a.topic:hover {
+  color: var(--nga-text-link) !important;
+}
+
+/* Topic tag [闲聊杂谈] etc. — pill card style with color variants */
+tr.topicrow .c2 .t_k_c0,
+tr.topicrow .c2 span[class*="t_k"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 3px 10px !important;
+  border-radius: 10px !important;
+  margin-right: 8px !important;
+  vertical-align: middle !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.02em !important;
+  white-space: nowrap !important;
+  border: 1px solid transparent !important;
+  transition: opacity 0.15s ease !important;
+  /* default blue */
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+  border-color: color-mix(in srgb, var(--nga-tag-blue-text) 20%, transparent) !important;
+}
+
+/* Color by common NGA tag names */
+/* 版务/公告 → red */
+tr.topicrow .c2 span[class*="t_k"][style*="color: red"],
+tr.topicrow .c2 span[class*="t_k"][style*="color:red"] {
+  background: var(--nga-tag-red-bg) !important;
+  color: var(--nga-tag-red-text) !important;
+  border-color: color-mix(in srgb, var(--nga-tag-red-text) 20%, transparent) !important;
+}
+
+/* Specific tag color classes based on NGA's c0-c9 system */
+tr.topicrow .c2 .t_k_c1 { /* often green */
+  background: var(--nga-tag-green-bg) !important;
+  color: var(--nga-tag-green-text) !important;
+  border-color: color-mix(in srgb, var(--nga-tag-green-text) 20%, transparent) !important;
+}
+
+tr.topicrow .c2 .t_k_c2 { /* often purple */
+  background: var(--nga-tag-purple-bg) !important;
+  color: var(--nga-tag-purple-text) !important;
+  border-color: color-mix(in srgb, var(--nga-tag-purple-text) 20%, transparent) !important;
+}
+
+tr.topicrow .c2 .t_k_c3 { /* often red */
+  background: var(--nga-tag-red-bg) !important;
+  color: var(--nga-tag-red-text) !important;
+  border-color: color-mix(in srgb, var(--nga-tag-red-text) 20%, transparent) !important;
+}
+
+tr.topicrow .c2 .t_k_c4 { /* often gray */
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-tag-gray-text) !important;
+  border-color: color-mix(in srgb, var(--nga-tag-gray-text) 20%, transparent) !important;
+}
+
+/* Attachment indicator (+) */
+tr.topicrow .c2 > span > span[title*="附件"] {
+  color: var(--nga-text-tertiary) !important;
+  font-size: 12px !important;
+}
+
+/* In-thread pager [1 2 3] */
+tr.topicrow .c2 .pager {
+  font-size: 11px !important;
+  color: var(--nga-text-tertiary) !important;
+  margin-left: 4px !important;
+}
+
+tr.topicrow .c2 .pager a {
+  color: var(--nga-text-tertiary) !important;
+  text-decoration: none !important;
+}
+
+/* ── c1: Reply count — top right badge ── */
+tr.topicrow > td[c],
+tr.topicrow > .c1 {
+  grid-column: 2 / 3 !important;
+  grid-row: 1 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+  padding-left: 12px !important;
+}
+
+tr.topicrow .replies {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 32px !important;
+  height: 26px !important;
+  padding: 0 8px !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-secondary) !important;
+  text-decoration: none !important;
+}
+
+/* ── c3: Author + date — bottom left ── */
+tr.topicrow > .c3 {
+  grid-column: 1 / 2 !important;
+  grid-row: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 12px !important;
+}
+
+/* Author name initial badge */
+tr.topicrow .c3 b.block_txt[name="nameinit"],
+tr.topicrow .c4 b.block_txt[name="nameinit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 0 !important;
+  min-width: 20px !important;
+  flex-shrink: 0 !important;
+}
+
+tr.topicrow .c3 a.author {
+  color: var(--nga-text-secondary) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+tr.topicrow .c3 a.author:hover {
+  color: var(--nga-text-link) !important;
+}
+
+tr.topicrow .c3 .postdate {
+  color: var(--nga-text-tertiary) !important;
+  font-size: 11px !important;
+}
+
+/* Hide sort buttons inside cells */
+tr.topicrow .c3 > div:first-child,
+tr.topicrow .c4 > div:first-child {
+  display: none !important;
+}
+
+/* ── c4: Last reply + time — bottom right ── */
+tr.topicrow > .c4 {
+  grid-column: 2 / 3 !important;
+  grid-row: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 6px !important;
+  font-size: 12px !important;
+}
+
+tr.topicrow .c4 a.replydate {
+  color: var(--nga-text-tertiary) !important;
+  text-decoration: none !important;
+  font-size: 11px !important;
+}
+
+tr.topicrow .c4 .replyer {
+  color: var(--nga-text-secondary) !important;
+  font-size: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+/* ===========================
+   Pagination & Action Buttons
+   =========================== */
+
+#m_pbtntop,
+#m_pbtnbtm {
+  max-width: 1200px !important;
+  margin: 12px auto !important;
+  padding: 8px 16px !important;
+}
+
+#m_pbtntop .w100,
+#m_pbtnbtm .w100 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+#m_pbtntop .clear,
+#m_pbtnbtm .clear {
+  display: none !important;
+}
+
+/* Left side: page numbers */
+#m_pbtntop .left,
+#m_pbtnbtm .left {
+  float: none !important;
+}
+
+/* Right side: 精华区 etc. */
+#m_pbtntop .right_,
+#m_pbtnbtm .right_ {
+  float: none !important;
+}
+
+/* Button tables inside pagination — reset stdbtn overrides */
+#m_pbtntop table.stdbtn,
+#m_pbtnbtm table.stdbtn {
+  position: static !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  z-index: auto !important;
+}
+
+#m_pbtntop table.stdbtn td,
+#m_pbtnbtm table.stdbtn td {
+  padding: 0 2px !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Page number links */
+#m_pbtntop .uitxt1,
+#m_pbtnbtm .uitxt1 {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  padding: 0 8px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--nga-text-secondary) !important;
+  background: var(--nga-card-bg) !important;
+  border: 1px solid var(--nga-border) !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
+  white-space: nowrap !important;
+}
+
+#m_pbtntop .uitxt1:hover,
+#m_pbtnbtm .uitxt1:hover {
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+  border-color: var(--nga-tag-blue-text) !important;
+}
+
+/* Current page (active) */
+#m_pbtntop .invert,
+#m_pbtnbtm .invert {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  padding: 0 8px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  background: var(--nga-text-link) !important;
+  border: 1px solid var(--nga-text-link) !important;
+  text-decoration: none !important;
+}
+
+/* 精华区 button */
+#m_pbtntop .right_ a,
+#m_pbtnbtm .right_ a {
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 32px !important;
+  padding: 0 14px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--nga-text-secondary) !important;
+  background: var(--nga-card-bg) !important;
+  border: 1px solid var(--nga-border) !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease !important;
+}
+
+#m_pbtntop .right_ a:hover,
+#m_pbtnbtm .right_ a:hover {
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-primary) !important;
+}
+
+#m_pbtntop .right_ a span,
+#m_pbtnbtm .right_ a span {
+  font-size: 13px !important;
+}
+
+/* ===========================
+   General Link & Text Colors
+   =========================== */
+
+a {
+  color: var(--nga-text-link) !important;
+}
+
+a:hover {
+  color: var(--nga-text-link-hover) !important;
+}
+
+td, th, span, div, p {
+  color: inherit !important;
+}
+
+/* ===========================
+   Forum Box Headers
+   =========================== */
+
+.forumbox .block_txt_c0,
+.forumbox h2 {
+  background: var(--nga-card-bg) !important;
+  color: var(--nga-text-primary) !important;
+  border: 1px solid var(--nga-border) !important;
+  border-radius: 12px !important;
+  padding: 12px 18px !important;
+  margin-bottom: 8px !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* ===========================
+   Post / Comment View (read.php)
+   =========================== */
+
+/* Post table container */
+table.forumbox.postbox {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  background: transparent !important;
+  border: none !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  padding: 0 16px !important;
+}
+
+/* Hide ad cells */
+tr.postrow > .adshid {
+  display: none !important;
+}
+
+/* ── Post Card ── */
+tr.postrow {
+  display: flex !important;
+  flex-direction: column !important;
+  background: var(--nga-card-bg) !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--nga-border) !important;
+  box-shadow: var(--nga-card-shadow) !important;
+  margin-bottom: 8px !important;
+  position: relative !important;
+}
+
+/* ── c1: User Header Bar ── */
+tr.postrow > .c1 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 12px 20px 4px !important;
+  border: none !important;
+  background: transparent !important;
+  width: auto !important;
+  min-width: 0 !important;
+  text-align: left !important;
+  vertical-align: top !important;
+}
+
+/* Posterinfo wrapper → inline flex */
+tr.postrow > .c1 .posterinfo {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+/* First div inside posterinfo: identity row */
+tr.postrow > .c1 .posterinfo > div:first-child {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Avatar in user header — hidden */
+tr.postrow > .c1 .posterinfo img:not(.medalimg):not([src*="smile"]):not(.smile_a2) {
+  display: none !important;
+}
+
+/* Floor number — make it first via order, reset float */
+tr.postrow > .c1 .posterinfo .right {
+  float: none !important;
+  order: -1 !important;
+  display: inline-flex !important;
+}
+
+/* Floor number pill (#1 etc.) — hidden */
+tr.postrow > .c1 a[name^="l"].vertmod {
+  display: none !important;
+}
+
+/* UID badge in c1 — hidden */
+tr.postrow > .c1 a[name="uid"].vertmod {
+  display: none !important;
+}
+
+/* Username link */
+tr.postrow > .c1 a.userlink,
+tr.postrow > .c1 a.author {
+  color: var(--nga-text-primary) !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  white-space: nowrap !important;
+  transition: color 0.15s !important;
+}
+
+tr.postrow > .c1 a.userlink:hover,
+tr.postrow > .c1 a.author:hover {
+  color: var(--nga-text-link) !important;
+}
+
+/* Name initial badge */
+tr.postrow > .c1 b.block_txt[name="nameinit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 1em !important;
+  padding: 1px 4px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  vertical-align: middle !important;
+  margin-left: 1px !important;
+}
+
+/* UID number badge — styled via vertmod rule above, hidden in c1 fallback removed */
+
+/* ── Hide all user stats (级别/声望/威望/注册/等级条) ── */
+tr.postrow > .c1 .stat,
+tr.postrow > .c1 .r_container,
+tr.postrow > .c1 .stat_spacer,
+tr.postrow > .c1 .clickextend {
+  display: none !important;
+}
+
+tr.postrow > .c1 br,
+tr.postrow > .c1 .clear {
+  display: none !important;
+}
+
+/* ── c2: Content Zone ── */
+tr.postrow > .c2 {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  width: auto !important;
+  min-width: 0 !important;
+}
+
+/* ── Action Footer (date + vote + buttons — all in one row) ── */
+tr.postrow > .c2 > .postInfo,
+tr.postrow > .c2 > [id^="postInfo"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  padding: 6px 14px !important;
+  order: 99 !important;
+  border-top: 1px solid var(--nga-divider) !important;
+  border-bottom: none !important;
+  font-size: 12px !important;
+  color: var(--nga-text-tertiary) !important;
+  line-height: 1 !important;
+}
+
+tr.postrow > .c2 > .postInfo .postdatec,
+tr.postrow > .c2 > [id^="postInfo"] .postdatec {
+  color: var(--nga-text-tertiary) !important;
+  font-size: 12px !important;
+  margin-right: auto !important;
+}
+
+/* Device icon (Android/iOS) — subtle inline */
+tr.postrow > .c2 > .postInfo a.postinfoib {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-left: 2px !important;
+  opacity: 0.35 !important;
+}
+
+tr.postrow > .c2 > .postInfo a.postinfoib svg.iconfont {
+  height: 1.1em !important;
+  fill: var(--nga-text-tertiary) !important;
+}
+
+/* Action icon buttons (favorite, share, settings) — hidden */
+tr.postrow > .c2 > .postInfo a.postinfob {
+  display: none !important;
+}
+
+/* ── Voting (goodbad) — hidden ── */
+.goodbad {
+  display: none !important;
+}
+
+/* Subject + voting wrapper — minimal since voting is moved to footer by JS */
+tr.postrow > .c2 [id^="intentandsubject"] > div:first-child,
+tr.postrow > .c2 > span > div:first-child {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Subject h3 — show only if non-empty */
+tr.postrow > .c2 h3[id^="postsubject"]:empty {
+  display: none !important;
+}
+
+tr.postrow > .c2 h3[id^="postsubject"]:not(:empty) {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--nga-text-primary) !important;
+  margin: 0 !important;
+  padding: 10px 20px 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* ── Post Body Content ── */
+.postcontent,
+[id^="postcontent"],
+[id^="postcontentandsubject"] {
+  padding: 10px 20px 12px !important;
+  font-size: 14.5px !important;
+  line-height: 1.8 !important;
+  color: var(--nga-text-primary) !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  overflow-x: auto !important;
+  text-align: left !important;
+}
+
+/* Emoji/sticker images — inline, not oversized */
+.postcontent img.smile_a2,
+.postcontent img[src*="smile"] {
+  display: inline !important;
+  vertical-align: middle !important;
+  height: 1.5em !important;
+  width: auto !important;
+  margin: 0 2px !important;
+  border-radius: 0 !important;
+}
+
+/* Content images — half size with subtle rounding */
+.postcontent img:not([src="about:blank"]):not(.medalimg):not(.avatar):not([src*="smile"]):not(.smile_a2) {
+  border-radius: 10px !important;
+  max-width: 50% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 10px 0 !important;
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+}
+
+/* Tables in post — prevent overflow */
+.postcontent table {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  display: block !important;
+}
+
+/* Links in post */
+.postcontent a.urlincontent {
+  color: var(--nga-text-link) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--nga-text-link) 30%, transparent) !important;
+  transition: border-color 0.15s !important;
+}
+
+.postcontent a.urlincontent:hover {
+  border-bottom-color: var(--nga-text-link) !important;
+}
+
+/* Hide URL tips */
+.postcontent .urltip {
+  display: none !important;
+}
+
+/* Bracket decorations */
+.postcontent .apd {
+  color: var(--nga-border) !important;
+}
+
+/* Quote blocks — modern left-accent style */
+.postcontent .quote {
+  background: var(--nga-tag-gray-bg) !important;
+  border-left: 3px solid var(--nga-text-link) !important;
+  border-radius: 0 10px 10px 0 !important;
+  padding: 12px 16px !important;
+  margin: 12px 0 !important;
+  color: var(--nga-text-secondary) !important;
+  font-size: 13.5px !important;
+  line-height: 1.7 !important;
+  text-align: left !important;
+}
+
+/* Quote action buttons (+, R) */
+.postcontent .quote > a.block_txt {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 1px 5px !important;
+  margin: 0 2px 0 0 !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  vertical-align: baseline !important;
+  line-height: 1.2 !important;
+}
+
+/* Spoiler/collapse blocks */
+.postcontent .collapse_btn {
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-secondary) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+}
+
+.postcontent .collapse_btn:hover {
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+}
+
+/* Colored separator/marker links in post content */
+.postcontent a.block_txt:not(.white):not([name="nameinit"]) {
+  display: inline-block !important;
+  width: 4px !important;
+  height: 1em !important;
+  padding: 0 !important;
+  margin: 0 6px !important;
+  border-radius: 2px !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+}
+
+/* Video play button */
+.postcontent a.block_txt.white.nobr {
+  background: var(--nga-text-link) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 4px 14px !important;
+  font-size: 12px !important;
+  text-decoration: none !important;
+  transition: opacity 0.15s !important;
+}
+
+.postcontent a.block_txt.white.nobr:hover {
+  opacity: 0.85 !important;
+}
+
+/* ── Poster info line (fallback for alternate NGA view) ── */
+.posterInfoLine {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 16px 20px 6px !important;
+  border-bottom: none !important;
+  background: transparent !important;
+  line-height: 1.5 !important;
+}
+
+.posterInfoLine img.avatar {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+}
+
+.posterInfoLine a.author,
+.posterInfoLine a.userlink {
+  color: var(--nga-text-primary) !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+.posterInfoLine a.author:hover,
+.posterInfoLine a.userlink:hover {
+  color: var(--nga-text-link) !important;
+}
+
+.posterInfoLine b.block_txt[name="nameinit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 1em !important;
+  padding: 1px 4px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.posterInfoLine a[name="uid"] {
+  font-size: 10px !important;
+  padding: 2px 7px !important;
+  border-radius: 10px !important;
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-tertiary) !important;
+  opacity: 0.5 !important;
+}
+
+.posterInfoLine .usercol {
+  font-size: 11px !important;
+  color: var(--nga-text-tertiary) !important;
+}
+
+.posterInfoLine .userval {
+  color: var(--nga-text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+.posterInfoLine .medalimg {
+  width: 16px !important;
+  height: 16px !important;
+  opacity: 0.7 !important;
+}
+
+.posterInfoLine .block_txt_c0.stxt {
+  font-size: 10px !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+}
+
+/* ── Edit/Modification Footer ── */
+h4.postbodysubtitle {
+  padding: 10px 20px 4px !important;
+  margin: 0 !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--nga-text-tertiary) !important;
+  border-top: 1px solid var(--nga-divider) !important;
+}
+
+span.block_txt.block_txt_c3 {
+  display: inline-block !important;
+  font-size: 10px !important;
+  padding: 2px 8px !important;
+  margin: 2px 20px 10px !important;
+  border-radius: 10px !important;
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-tertiary) !important;
+}
+
+/* Expand attachments button */
+a.contentFullWidthButton {
+  display: block !important;
+  text-align: center !important;
+  padding: 8px !important;
+  margin: 0 20px 14px !important;
+  border-radius: 10px !important;
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-secondary) !important;
+  text-decoration: none !important;
+  font-size: 12px !important;
+  transition: background 0.15s, color 0.15s !important;
+}
+
+a.contentFullWidthButton:hover {
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+}
+
+/* ===========================
+   Nested Reply / Comment Boxes
+   =========================== */
+
+.comment_c {
+  width: auto !important;
+  float: none !important;
+  background: var(--nga-tag-gray-bg) !important;
+  border: 1px solid var(--nga-border) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  margin: 6px 20px !important;
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+  color: var(--nga-text-primary) !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+
+/* Comment poster info */
+.comment_c [id^="commentposterinfo"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 6px !important;
+  padding-bottom: 6px !important;
+  border-bottom: 1px solid var(--nga-divider) !important;
+}
+
+/* Comment avatar */
+.comment_c [id^="commentposterinfo"] > img {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+}
+
+/* Comment username */
+.comment_c a.author,
+.comment_c a.userlink {
+  color: var(--nga-text-primary) !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+}
+
+.comment_c a.author:hover,
+.comment_c a.userlink:hover {
+  color: var(--nga-text-link) !important;
+}
+
+/* Comment floor/UID badges */
+.comment_c a.block_txt_c0,
+.comment_c a[name="uid"] {
+  font-size: 10px !important;
+  padding: 1px 5px !important;
+  border-radius: 4px !important;
+  opacity: 0.5 !important;
+  margin-left: auto !important;
+}
+
+/* Comment date */
+.comment_c .postdatec,
+.comment_c .stxt {
+  font-size: 11px !important;
+  color: var(--nga-text-tertiary) !important;
+}
+
+/* Comment content text */
+.comment_c .ubbcode,
+.comment_c [id^="postcontent"] {
+  padding: 4px 0 !important;
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+}
+
+/* Comment images */
+.comment_c img:not([src="about:blank"]):not([src*="smile"]):not(.smile_a2) {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  border-radius: 6px !important;
+  margin: 4px 0 !important;
+}
+
+/* Comment action links */
+.comment_c a.small_colored_text_btn {
+  font-size: 10px !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  color: var(--nga-text-tertiary) !important;
+  text-decoration: none !important;
+}
+
+.comment_c a.small_colored_text_btn:hover {
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+}
+
+/* Comment name initial badge */
+.comment_c b.block_txt[name="nameinit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 1em !important;
+  padding: 1px 3px !important;
+  border-radius: 3px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+}
+
+/* Comment user stats — hide */
+.comment_c .stat,
+.comment_c .r_container,
+.comment_c .stat_spacer,
+.comment_c .clickextend {
+  display: none !important;
+}
+
+/* ===========================
+   Comment Content Cell (.comment_c_2)
+   =========================== */
+
+td.comment_c_2 {
+  background: transparent !important;
+  padding: 10px 14px !important;
+  border: none !important;
+  vertical-align: top !important;
+  position: relative !important;
+  text-align: left !important;
+}
+
+/* Inner wrapper */
+.comment_c_3 {
+  display: block !important;
+}
+
+/* ── Three-dot menu button (top-right) ── */
+a.postoptswb {
+  float: right !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  text-decoration: none !important;
+  transition: background 0.15s !important;
+  margin-left: 6px !important;
+  opacity: 0.4 !important;
+}
+
+a.postoptswb:hover {
+  background: var(--nga-tag-gray-bg) !important;
+  opacity: 1 !important;
+}
+
+a.postoptswb svg.iconfont {
+  height: 1em !important;
+  fill: var(--nga-text-tertiary) !important;
+  transition: fill 0.15s !important;
+}
+
+a.postoptswb:hover svg.iconfont {
+  fill: var(--nga-text-primary) !important;
+}
+
+/* ── Comment Action Bar (expandable) ── */
+[id^="commentInfo"] {
+  display: none;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 6px 0 !important;
+  margin-top: 6px !important;
+  border-top: 1px solid var(--nga-divider) !important;
+  line-height: 1 !important;
+}
+
+/* When JS shows it (removes display:none) */
+[id^="commentInfo"][style*="display: block"],
+[id^="commentInfo"][style*="display:block"],
+[id^="commentInfo"][style*="display: inline"],
+[id^="commentInfo"][style*="display:inline"] {
+  display: flex !important;
+}
+
+/* Comment date */
+[id^="commentInfo"] .postdatec {
+  color: var(--nga-text-tertiary) !important;
+  font-size: 11px !important;
+  margin-right: auto !important;
+}
+
+/* Comment action buttons (favorite, settings) */
+[id^="commentInfo"] a.postinfob,
+[id^="commentInfo"] a.postfavb,
+[id^="commentInfo"] a.postoptb {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  text-decoration: none !important;
+  transition: background 0.15s !important;
+  padding: 0 !important;
+}
+
+[id^="commentInfo"] a.postinfob:hover,
+[id^="commentInfo"] a.postfavb:hover,
+[id^="commentInfo"] a.postoptb:hover {
+  background: var(--nga-tag-gray-bg) !important;
+}
+
+[id^="commentInfo"] svg.iconfont {
+  width: 14px !important;
+  height: 14px !important;
+  fill: var(--nga-text-tertiary) !important;
+  transition: fill 0.15s !important;
+  margin: 0 !important;
+}
+
+[id^="commentInfo"] a:hover svg.iconfont {
+  fill: var(--nga-text-primary) !important;
+}
+
+/* Comment voting widget */
+[id^="commentInfo"] .goodbad {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+[id^="commentInfo"] .ogoodbtn {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: var(--nga-tag-gray-bg) !important;
+  border-radius: 8px !important;
+  padding: 2px 3px !important;
+}
+
+[id^="commentInfo"] .ogoodbtn a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 20px !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+  transition: background 0.15s !important;
+  margin: 0 !important;
+}
+
+[id^="commentInfo"] .ogoodbtn a:hover {
+  background: var(--nga-card-bg) !important;
+}
+
+[id^="commentInfo"] .ogoodbtn svg.iconfont {
+  height: 0.8em !important;
+  width: auto !important;
+}
+
+[id^="commentInfo"] .ogoodbtn a:first-of-type:hover svg.iconfont {
+  fill: var(--nga-tag-green-text) !important;
+}
+
+[id^="commentInfo"] .ogoodbtn a:last-of-type:hover svg.iconfont {
+  fill: var(--nga-tag-red-text) !important;
+}
+
+[id^="commentInfo"] .recommendvalue {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  min-width: 8px !important;
+  text-align: center !important;
+  color: var(--nga-text-secondary) !important;
+  padding: 0 2px !important;
+}
+
+[id^="commentInfo"] .urltip {
+  display: none !important;
+}
+
+/* ── Comment Content Text ── */
+span[id^="postcomment"] {
+  display: block !important;
+  font-size: 13.5px !important;
+  line-height: 1.7 !important;
+  color: var(--nga-text-primary) !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Comment collapse buttons */
+.comment_c_2 .collapse_btn,
+.comment_c_3 .collapse_btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-secondary) !important;
+  border-radius: 8px !important;
+  padding: 4px 12px !important;
+  font-size: 12px !important;
+  margin: 4px 0 !important;
+}
+
+.comment_c_2 .collapse_btn button,
+.comment_c_3 .collapse_btn button {
+  background: transparent !important;
+  border: none !important;
+  color: var(--nga-text-link) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+}
+
+/* Comment "view all" link */
+span[id^="postcomment"] a.silver {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 2px 10px !important;
+  border-radius: 8px !important;
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+  text-decoration: none !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  margin-left: 4px !important;
+  transition: background 0.15s !important;
+}
+
+span[id^="postcomment"] a.silver:hover {
+  background: color-mix(in srgb, var(--nga-tag-blue-bg) 70%, var(--nga-tag-blue-text)) !important;
+}
+
+/* Comment images */
+.comment_c_2 img:not([src="about:blank"]):not([src*="smile"]):not(.smile_a2),
+.comment_c_3 img:not([src="about:blank"]):not([src*="smile"]):not(.smile_a2) {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  border-radius: 8px !important;
+  margin: 6px 0 !important;
+}
+
+/* Comment emoji inline */
+.comment_c_2 img[src*="smile"],
+.comment_c_2 img.smile_a2,
+.comment_c_3 img[src*="smile"],
+.comment_c_3 img.smile_a2 {
+  display: inline !important;
+  height: 1.4em !important;
+  width: auto !important;
+  vertical-align: middle !important;
+  margin: 0 1px !important;
+  border-radius: 0 !important;
+}
+
+/* Comment quotes */
+.comment_c_2 .quote,
+.comment_c_3 .quote {
+  background: color-mix(in srgb, var(--nga-tag-gray-bg) 60%, var(--nga-card-bg)) !important;
+  border-left: 2px solid var(--nga-text-link) !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 8px 12px !important;
+  margin: 6px 0 !important;
+  font-size: 12.5px !important;
+  color: var(--nga-text-secondary) !important;
+  text-align: left !important;
+}
+
+/* Comment quote action buttons (+, R) */
+.comment_c_2 .quote > a.block_txt,
+.comment_c_3 .quote > a.block_txt {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 1px 5px !important;
+  margin: 0 2px 0 0 !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  vertical-align: baseline !important;
+  line-height: 1.2 !important;
+}
+
+/* ===========================
+   NGA Popup / Modal
+   =========================== */
+
+/* Common modal overlay */
+#commonmaskbg {
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* Modal content box */
+.commonmodalcont,
+.tipModal,
+div[id^="commonmodal"] > div,
+.ngapopupbody {
+  background: var(--nga-card-bg) !important;
+  border: 1px solid var(--nga-border) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18) !important;
+  color: var(--nga-text-primary) !important;
+  overflow: hidden !important;
+}
+
+/* Modal title bar */
+.commonmodalcont h3,
+.tipModal h3,
+div[id^="commonmodal"] h3 {
+  background: transparent !important;
+  color: var(--nga-text-primary) !important;
+  border-bottom: 1px solid var(--nga-divider) !important;
+  padding: 14px 18px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+/* Modal body */
+.commonmodalcont .w100,
+.commonmodalcont td {
+  background: transparent !important;
+  color: var(--nga-text-primary) !important;
+  border: none !important;
+}
+
+/* Modal links/buttons */
+.commonmodalcont a,
+.tipModal a {
+  color: var(--nga-text-link) !important;
+  text-decoration: none !important;
+}
+
+.commonmodalcont a:hover,
+.tipModal a:hover {
+  color: var(--nga-text-link-hover) !important;
+}
+
+/* Modal action buttons */
+.commonmodalcont .uitxt1,
+.commonmodalcont input[type="button"],
+.commonmodalcont button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 16px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border: 1px solid var(--nga-border) !important;
+  background: var(--nga-card-bg) !important;
+  color: var(--nga-text-primary) !important;
+  cursor: pointer !important;
+  transition: background 0.15s, border-color 0.15s !important;
+}
+
+.commonmodalcont .uitxt1:hover,
+.commonmodalcont input[type="button"]:hover,
+.commonmodalcont button:hover {
+  background: var(--nga-tag-blue-bg) !important;
+  border-color: var(--nga-tag-blue-text) !important;
+  color: var(--nga-tag-blue-text) !important;
+}
+
+/* Category hover tooltip (sub-forum quick links) */
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] {
+  background: var(--nga-card-bg) !important;
+  border: 1px solid var(--nga-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+  padding: 6px !important;
+  font-size: 13px !important;
+  line-height: normal !important;
+}
+
+/* Wrapper span: vertical list layout */
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] > span {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+/* Each link row */
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] > span > span {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 10px !important;
+  border-radius: 8px !important;
+  transition: background 0.12s !important;
+  white-space: nowrap !important;
+}
+
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] > span > span:hover {
+  background: var(--nga-tag-gray-bg) !important;
+}
+
+/* Hide the <br> tags, layout handled by flexbox */
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] br {
+  display: none !important;
+}
+
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] a {
+  color: var(--nga-text-primary) !important;
+  text-decoration: none !important;
+  transition: color 0.15s !important;
+}
+
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] a.teal,
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] a.b {
+  color: var(--nga-text-link) !important;
+}
+
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] a:hover {
+  color: var(--nga-text-link-hover) !important;
+}
+
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] .hovernoline {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] svg.iconfont {
+  fill: var(--nga-text-tertiary) !important;
+  width: 14px !important;
+  height: 14px !important;
+  transition: fill 0.15s !important;
+}
+
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] a:hover svg.iconfont {
+  fill: var(--nga-text-link) !important;
+}
+
+/* Bottom settings icon — hidden */
+div[style*="position: absolute"][style*="rgb(255, 248, 231)"] > span > a[style*="float"] {
+  display: none !important;
+}
+
+/* Popup menu (settings dropdown etc.) */
+.ngapopupmenu,
+div.ngapopup {
+  background: var(--nga-card-bg) !important;
+  border: 1px solid var(--nga-border) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  overflow: hidden !important;
+  padding: 4px !important;
+}
+
+/* Popup menu items */
+.ngapopupmenu a,
+.ngapopupmenu div[onclick],
+div.ngapopup a,
+div.ngapopup .uitxt1 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  color: var(--nga-text-primary) !important;
+  text-decoration: none !important;
+  font-size: 13px !important;
+  transition: background 0.12s !important;
+  cursor: pointer !important;
+}
+
+.ngapopupmenu a:hover,
+.ngapopupmenu div[onclick]:hover,
+div.ngapopup a:hover,
+div.ngapopup .uitxt1:hover {
+  background: var(--nga-tag-gray-bg) !important;
+  color: var(--nga-text-link) !important;
+}
+
+/* Popup menu SVG icons */
+.ngapopupmenu svg.iconfont,
+div.ngapopup svg.iconfont {
+  width: 16px !important;
+  height: 16px !important;
+  fill: var(--nga-text-secondary) !important;
+}
+
+/* ===========================
+   Floating Toolbar
+   =========================== */
+
+#nga-alpha-toolbar {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+#nga-alpha-toolbar button {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--nga-border) !important;
+  background: var(--nga-toolbar-bg) !important;
+  box-shadow: var(--nga-toolbar-shadow) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  cursor: pointer !important;
+  font-size: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+#nga-alpha-toolbar button:hover {
+  transform: scale(1.1) !important;
+}
+
+#nga-alpha-toolbar button:active {
+  transform: scale(0.95) !important;
+}
+
+/* Back to top button */
+#nga-alpha-top-btn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+
+#nga-alpha-top-btn.visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

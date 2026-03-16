@@ -9,13 +9,26 @@ export default defineContentScript({
     const THEME_KEY = 'nga-alpha-theme';
     type Theme = 'light' | 'dark';
 
+    let link: HTMLLinkElement | null = null;
+    let observer: MutationObserver | null = null;
+
     // -- Inject CSS early --
 
-    const cssUrl = browser.runtime.getURL('/contentStyle.css');
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = cssUrl;
-    (document.head || document.documentElement).appendChild(link);
+    function injectCSS() {
+      if (link) return;
+      const cssUrl = browser.runtime.getURL('/contentStyle.css');
+      link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = cssUrl;
+      (document.head || document.documentElement).appendChild(link);
+    }
+
+    function removeCSS() {
+      if (link) {
+        link.remove();
+        link = null;
+      }
+    }
 
     // -- Theme System --
 
@@ -28,12 +41,14 @@ export default defineContentScript({
       document.documentElement.setAttribute('data-nga-theme', theme);
     }
 
-    // Apply theme immediately to prevent flash
-    applyTheme(getTheme());
+    function removeTheme() {
+      document.documentElement.removeAttribute('data-nga-theme');
+    }
 
     // -- Floating Toolbar --
 
     function createToolbar() {
+      if (document.getElementById('nga-alpha-toolbar')) return;
       const toolbar = document.createElement('div');
       toolbar.id = 'nga-alpha-toolbar';
 
@@ -72,6 +87,10 @@ export default defineContentScript({
       document.body.appendChild(toolbar);
     }
 
+    function removeToolbar() {
+      document.getElementById('nga-alpha-toolbar')?.remove();
+    }
+
     // -- Hide Unwanted Elements --
 
     function hideElements() {
@@ -86,6 +105,22 @@ export default defineContentScript({
       selectors.forEach((sel) => {
         document.querySelectorAll(sel).forEach((el) => {
           (el as HTMLElement).style.display = 'none';
+        });
+      });
+    }
+
+    function unhideElements() {
+      const selectors = [
+        '#m_ads',
+        '#m_footer',
+        '#footer',
+        'iframe[src*="ad"]',
+        'div[id*="ad_"]',
+        'div[class*="advertisement"]',
+      ];
+      selectors.forEach((sel) => {
+        document.querySelectorAll(sel).forEach((el) => {
+          (el as HTMLElement).style.removeProperty('display');
         });
       });
     }
@@ -107,19 +142,56 @@ export default defineContentScript({
       });
     }
 
-    // -- Init --
+    // -- Enable / Disable --
 
-    function init() {
+    function enable() {
+      injectCSS();
+      applyTheme(getTheme());
       createToolbar();
       hideElements();
       reorganizePostActions();
 
-      // Watch for dynamically loaded content (NGA lazy-loads some elements)
-      const observer = new MutationObserver(() => {
+      observer = new MutationObserver(() => {
         hideElements();
         reorganizePostActions();
       });
       observer.observe(document.body, { childList: true, subtree: true });
+      console.log('[NGA Alpha] Enabled');
+    }
+
+    function disable() {
+      observer?.disconnect();
+      observer = null;
+      removeToolbar();
+      removeCSS();
+      removeTheme();
+      unhideElements();
+      console.log('[NGA Alpha] Disabled');
+    }
+
+    // -- Listen for toggle from popup --
+
+    browser.storage.onChanged.addListener((changes) => {
+      if (changes.enabled) {
+        if (changes.enabled.newValue === false) {
+          disable();
+        } else {
+          enable();
+        }
+      }
+    });
+
+    // -- Init --
+
+    function init() {
+      browser.storage.local.get('enabled').then((result) => {
+        if (result.enabled === false) {
+          console.log('[NGA Alpha] Content script loaded (disabled)');
+          return;
+        }
+        enable();
+        console.log('[NGA Alpha] Content script loaded, theme:', getTheme());
+      });
     }
 
     if (document.readyState === 'loading') {
@@ -127,7 +199,5 @@ export default defineContentScript({
     } else {
       init();
     }
-
-    console.log('[NGA Alpha] Content script loaded, theme:', getTheme());
   },
 });

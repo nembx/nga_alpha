@@ -2,7 +2,7 @@
   "name": "nga-alpha",
   "description": "NGA论坛板块页面美化：卡片布局、悬浮导航、亮暗主题切换",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "wxt",

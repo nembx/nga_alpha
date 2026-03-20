@@ -9,7 +9,7 @@ export default defineConfig({
     permissions: ['activeTab', 'storage'],
     web_accessible_resources: [
       {
-        resources: ['contentStyle.css', 'icon/*.png'],
+        resources: ['icon/*.png'],
         matches: ['*://bbs.nga.cn/*', '*://nga.178.com/*', '*://ngabbs.com/*'],
       },
     ],

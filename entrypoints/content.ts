@@ -1,3 +1,5 @@
+import contentCss from '../assets/contentStyle.css?raw';
+
 // NGA Alpha - Content Script
 // Transforms NGA board pages: card layout, sticky nav, theme toggle
 
@@ -6,31 +8,45 @@ export default defineContentScript({
   runAt: 'document_start',
 
   main() {
+    const ENABLED_KEY = 'nga-alpha-enabled';
     const THEME_KEY = 'nga-alpha-theme';
     type Theme = 'light' | 'dark';
 
-    let link: HTMLLinkElement | null = null;
+    let style: HTMLStyleElement | null = null;
     let observer: MutationObserver | null = null;
+    let scrollHandler: (() => void) | null = null;
+    let isEnabled = false;
+    let domInitScheduled = false;
 
     // -- Inject CSS early --
 
     function injectCSS() {
-      if (link) return;
-      const cssUrl = browser.runtime.getURL('/contentStyle.css');
-      link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = cssUrl;
-      (document.head || document.documentElement).appendChild(link);
+      if (style) return;
+      style = document.createElement('style');
+      style.id = 'nga-alpha-style';
+      style.textContent = contentCss;
+      (document.head || document.documentElement).appendChild(style);
     }
 
     function removeCSS() {
-      if (link) {
-        link.remove();
-        link = null;
+      if (style) {
+        style.remove();
+        style = null;
       }
     }
 
     // -- Theme System --
+
+    function getCachedEnabled(): boolean | null {
+      const cached = localStorage.getItem(ENABLED_KEY);
+      if (cached === 'true') return true;
+      if (cached === 'false') return false;
+      return null;
+    }
+
+    function setCachedEnabled(enabled: boolean) {
+      localStorage.setItem(ENABLED_KEY, String(enabled));
+    }
 
     function getTheme(): Theme {
       return (localStorage.getItem(THEME_KEY) as Theme) || 'light';
@@ -48,6 +64,7 @@ export default defineContentScript({
     // -- Floating Toolbar --
 
     function createToolbar() {
+      if (!document.body) return;
       if (document.getElementById('nga-alpha-toolbar')) return;
       const toolbar = document.createElement('div');
       toolbar.id = 'nga-alpha-toolbar';
@@ -74,13 +91,11 @@ export default defineContentScript({
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      window.addEventListener(
-        'scroll',
-        () => {
-          topBtn.classList.toggle('visible', window.scrollY > 400);
-        },
-        { passive: true },
-      );
+      scrollHandler = () => {
+        topBtn.classList.toggle('visible', window.scrollY > 400);
+      };
+      window.addEventListener('scroll', scrollHandler, { passive: true });
+      scrollHandler();
 
       toolbar.appendChild(themeBtn);
       toolbar.appendChild(topBtn);
@@ -89,6 +104,10 @@ export default defineContentScript({
 
     function removeToolbar() {
       document.getElementById('nga-alpha-toolbar')?.remove();
+      if (scrollHandler) {
+        window.removeEventListener('scroll', scrollHandler);
+        scrollHandler = null;
+      }
     }
 
     // -- Hide Unwanted Elements --
@@ -144,22 +163,51 @@ export default defineContentScript({
 
     // -- Enable / Disable --
 
-    function enable() {
-      injectCSS();
-      applyTheme(getTheme());
+    function enableDomFeatures() {
+      if (!isEnabled || !document.body) return;
+
       createToolbar();
       hideElements();
       reorganizePostActions();
 
-      observer = new MutationObserver(() => {
-        hideElements();
-        reorganizePostActions();
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
+      if (!observer) {
+        observer = new MutationObserver(() => {
+          hideElements();
+          reorganizePostActions();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    }
+
+    function scheduleDomFeatures() {
+      if (document.body) {
+        enableDomFeatures();
+        return;
+      }
+
+      if (domInitScheduled) return;
+      domInitScheduled = true;
+
+      document.addEventListener(
+        'DOMContentLoaded',
+        () => {
+          domInitScheduled = false;
+          enableDomFeatures();
+        },
+        { once: true },
+      );
+    }
+
+    function enable() {
+      isEnabled = true;
+      injectCSS();
+      applyTheme(getTheme());
+      scheduleDomFeatures();
       console.log('[NGA Alpha] Enabled');
     }
 
     function disable() {
+      isEnabled = false;
       observer?.disconnect();
       observer = null;
       removeToolbar();
@@ -174,8 +222,10 @@ export default defineContentScript({
     browser.storage.onChanged.addListener((changes) => {
       if (changes.enabled) {
         if (changes.enabled.newValue === false) {
+          setCachedEnabled(false);
           disable();
         } else {
+          setCachedEnabled(true);
           enable();
         }
       }
@@ -184,20 +234,26 @@ export default defineContentScript({
     // -- Init --
 
     function init() {
+      const cachedEnabled = getCachedEnabled();
+      if (cachedEnabled !== false) {
+        enable();
+      }
+
       browser.storage.local.get('enabled').then((result) => {
-        if (result.enabled === false) {
+        const enabled = result.enabled !== false;
+        setCachedEnabled(enabled);
+
+        if (!enabled) {
+          disable();
           console.log('[NGA Alpha] Content script loaded (disabled)');
           return;
         }
+
         enable();
         console.log('[NGA Alpha] Content script loaded, theme:', getTheme());
       });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
+    init();
   },
 });

@@ -6,7 +6,7 @@ function App() {
 
   useEffect(() => {
     browser.storage.local.get('enabled').then((result) => {
-      if (result.enabled !== undefined) {
+      if (typeof result.enabled === 'boolean') {
         setEnabled(result.enabled);
       }
     });

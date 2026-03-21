@@ -13,7 +13,7 @@
   --nga-text-tertiary: #9ca3af;
   --nga-text-link: #2563eb;
   --nga-text-link-hover: #1d4ed8;
-  --nga-border: #e5e7eb;
+  --nga-border: #cfd8e3;
   --nga-nav-bg: rgba(255, 255, 255, 0.88);
   --nga-nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   --nga-tag-red-bg: #fee2e2;
@@ -24,13 +24,14 @@
   --nga-tag-green-text: #16a34a;
   --nga-tag-purple-bg: #f3e8ff;
   --nga-tag-purple-text: #9333ea;
-  --nga-tag-gray-bg: #f3f4f6;
-  --nga-tag-gray-text: #6b7280;
+  --nga-tag-gray-bg: #eef2f7;
+  --nga-tag-gray-text: #64748b;
   --nga-avatar-bg: #e0e7ff;
   --nga-avatar-text: #4f46e5;
   --nga-toolbar-bg: rgba(255, 255, 255, 0.95);
   --nga-toolbar-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  --nga-divider: #f0f0f0;
+  --nga-divider: #dde4ee;
+  --nga-post-indent: 1em;
 }
 
 :root[data-nga-theme="dark"] {
@@ -43,7 +44,7 @@
   --nga-text-tertiary: #606070;
   --nga-text-link: #60a5fa;
   --nga-text-link-hover: #93bbfd;
-  --nga-border: #2a2a3a;
+  --nga-border: #3a465c;
   --nga-nav-bg: rgba(22, 22, 30, 0.92);
   --nga-nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   --nga-tag-red-bg: rgba(220, 38, 38, 0.15);
@@ -54,13 +55,13 @@
   --nga-tag-green-text: #4ade80;
   --nga-tag-purple-bg: rgba(147, 51, 234, 0.15);
   --nga-tag-purple-text: #c084fc;
-  --nga-tag-gray-bg: rgba(107, 114, 128, 0.15);
-  --nga-tag-gray-text: #9ca3af;
+  --nga-tag-gray-bg: rgba(148, 163, 184, 0.12);
+  --nga-tag-gray-text: #a5b4c8;
   --nga-avatar-bg: rgba(79, 70, 229, 0.2);
   --nga-avatar-text: #818cf8;
   --nga-toolbar-bg: rgba(30, 30, 46, 0.95);
   --nga-toolbar-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  --nga-divider: #2a2a3a;
+  --nga-divider: #30384a;
 }
 
 /* Hide coin icons (gold/silver/copper) */
@@ -77,6 +78,11 @@ img[src*="c.gif"] {
 body {
   background: var(--nga-bg) !important;
   color: var(--nga-text-primary) !important;
+}
+
+:where(table, tbody, thead, tfoot, tr, td, th, div, span, p, ul, ol, li, form, fieldset, legend, input, textarea, select, button, hr) {
+  border-color: var(--nga-border) !important;
+  outline-color: color-mix(in srgb, var(--nga-border) 65%, transparent) !important;
 }
 
 /* ===========================
@@ -240,6 +246,7 @@ div.stdbtn .td a[href*="app.nga.cn"] {
   display: inline-flex !important;
   align-items: center !important;
   padding: 4px 10px !important;
+  border: 1px solid var(--nga-border) !important;
   border-radius: 6px !important;
   color: var(--nga-text-tertiary) !important;
   text-decoration: none !important;
@@ -247,12 +254,15 @@ div.stdbtn .td a[href*="app.nga.cn"] {
   font-weight: 600 !important;
   letter-spacing: 0.05em !important;
   background: var(--nga-tag-gray-bg) !important;
+  box-shadow: none !important;
+  outline: none !important;
   transition: background 0.15s ease, color 0.15s ease !important;
 }
 
 .nav .nav_root:hover {
   color: var(--nga-text-primary) !important;
   background: var(--nga-border) !important;
+  border-color: var(--nga-text-secondary) !important;
 }
 
 /* Breadcrumb separator */
@@ -271,18 +281,22 @@ div.stdbtn .td a[href*="app.nga.cn"] {
   display: inline-flex !important;
   align-items: center !important;
   padding: 4px 12px !important;
+  border: 1px solid var(--nga-border) !important;
   border-radius: 6px !important;
   color: var(--nga-text-link) !important;
   text-decoration: none !important;
   font-size: 13px !important;
   font-weight: 500 !important;
   background: var(--nga-tag-blue-bg) !important;
+  box-shadow: none !important;
+  outline: none !important;
   transition: background 0.15s ease, color 0.15s ease !important;
 }
 
 .nav .nav_link:hover {
   color: var(--nga-text-link-hover) !important;
   background: color-mix(in srgb, var(--nga-tag-blue-bg) 80%, var(--nga-tag-blue-text)) !important;
+  border-color: var(--nga-tag-blue-text) !important;
 }
 
 /* Don't show display:none links */
@@ -551,51 +565,84 @@ div.stdbtn .td a[href*="app.nga.cn"] {
 /* Tables inside content block */
 .contentBlock .tablecontainer {
   margin: 0 !important;
+  width: 100% !important;
 }
 
 .contentBlock .tablespacer {
   margin: 0 !important;
   padding: 0 !important;
+  width: 100% !important;
 }
 
 .contentBlock table {
   border-collapse: collapse !important;
-  width: auto !important;
-  max-width: 100% !important;
+  width: 100% !important;
+  max-width: none !important;
 }
 
 .contentBlock td {
   background: transparent !important;
-  padding: 8px !important;
+  padding: 0 !important;
   border: none !important;
-  border-bottom: 1px solid var(--nga-divider) !important;
   vertical-align: top !important;
   color: var(--nga-text-primary) !important;
 }
 
-.contentBlock td:not(:last-child) {
-  border-right: 1px solid var(--nga-divider) !important;
+/* Preserve NGA's original announcement colors inside pinned blocks */
+.contentBlock .darkblue {
+  color: darkblue !important;
 }
 
-/* Override inline colored text for theme compatibility */
-.contentBlock .darkblue,
-.contentBlock .skyblue,
-.contentBlock .limegreen,
-.contentBlock .sandybrown,
-.contentBlock .deeppink,
-.contentBlock .purple,
-.contentBlock .orange,
-.contentBlock .red,
-.contentBlock .blue,
-.contentBlock .green,
-.contentBlock .sienna,
-.contentBlock .indigo,
+.contentBlock .skyblue {
+  color: skyblue !important;
+}
+
+.contentBlock .limegreen {
+  color: limegreen !important;
+}
+
+.contentBlock .sandybrown {
+  color: sandybrown !important;
+}
+
+.contentBlock .deeppink {
+  color: deeppink !important;
+}
+
+.contentBlock .purple {
+  color: purple !important;
+}
+
+.contentBlock .orange {
+  color: orange !important;
+}
+
+.contentBlock .red {
+  color: red !important;
+}
+
+.contentBlock .blue {
+  color: blue !important;
+}
+
+.contentBlock .green {
+  color: green !important;
+}
+
+.contentBlock .sienna {
+  color: sienna !important;
+}
+
+.contentBlock .indigo {
+  color: indigo !important;
+}
+
 .contentBlock .chocolate {
-  color: var(--nga-text-link) !important;
+  color: chocolate !important;
 }
 
 .contentBlock .silver {
-  color: var(--nga-text-tertiary) !important;
+  color: silver !important;
 }
 
 /* Links inside content block */
@@ -609,16 +656,16 @@ div.stdbtn .td a[href*="app.nga.cn"] {
   text-decoration: underline !important;
 }
 
+.contentBlock .apd {
+  color: var(--nga-border) !important;
+}
+
 /* Hide URL tooltip spans */
 .contentBlock .urltip {
   display: none !important;
 }
 
 /* Bracket decorations — muted */
-.contentBlock .apd {
-  color: var(--nga-border) !important;
-}
-
 /* Quick view buttons [R] [T] */
 .contentBlock a.block_txt_c0 {
   display: inline-block !important;
@@ -744,6 +791,45 @@ tr.topicrow .c2 a.topic:hover {
 }
 
 /* Topic tag [闲聊杂谈] etc. — pill card style with color variants */
+/* Thread collection links like [榭洛酱の私密酒馆(水区)] */
+tr.topicrow > .c2:has(a.silver[href*="thread.php?stid="]) {
+  position: relative !important;
+  padding-left: calc(14em + 8px) !important;
+  min-height: 1.6em !important;
+}
+
+tr.topicrow .c2 a.silver[href*="thread.php?stid="] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 14em !important;
+  max-width: min(14em, calc(100% - 8px)) !important;
+  box-sizing: border-box !important;
+  padding: 3px 10px !important;
+  margin: 0 !important;
+  border-radius: 10px !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  line-height: 1.4 !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  color: var(--nga-tag-gray-text) !important;
+  background: var(--nga-tag-gray-bg) !important;
+  border: 1px solid color-mix(in srgb, var(--nga-tag-gray-text) 20%, transparent) !important;
+}
+
+tr.topicrow .c2 a.silver[href*="thread.php?stid="]:hover {
+  color: var(--nga-text-secondary) !important;
+  border-color: color-mix(in srgb, var(--nga-text-secondary) 25%, transparent) !important;
+}
+
 tr.topicrow .c2 .t_k_c0,
 tr.topicrow .c2 span[class*="t_k"] {
   display: inline-flex !important;
@@ -1270,6 +1356,9 @@ tr.postrow > .c2 [id^="intentandsubject"] > div:first-child,
 tr.postrow > .c2 > span > div:first-child {
   padding: 0 !important;
   margin: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
 }
 
 /* Subject h3 — show only if non-empty */
@@ -1278,19 +1367,22 @@ tr.postrow > .c2 h3[id^="postsubject"]:empty {
 }
 
 tr.postrow > .c2 h3[id^="postsubject"]:not(:empty) {
-  font-size: 16px !important;
-  font-weight: 600 !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
   color: var(--nga-text-primary) !important;
   margin: 0 !important;
   padding: 10px 20px 0 !important;
-  line-height: 1.4 !important;
+  line-height: 1.2 !important;
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
 }
 
 /* ── Post Body Content ── */
 .postcontent,
-[id^="postcontent"],
-[id^="postcontentandsubject"] {
-  padding: 10px 20px 12px !important;
+[id^="postcontent"]:not([id^="postcontentandsubject"]) {
+  display: block !important;
+  padding: 10px 20px 12px calc(20px + var(--nga-post-indent)) !important;
   font-size: 14.5px !important;
   line-height: 1.8 !important;
   color: var(--nga-text-primary) !important;
@@ -1298,6 +1390,23 @@ tr.postrow > .c2 h3[id^="postsubject"]:not(:empty) {
   overflow-wrap: break-word !important;
   overflow-x: auto !important;
   text-align: left !important;
+  text-indent: 0 !important;
+}
+
+[id^="postcontentandsubject"] {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-indent: 0 !important;
+}
+
+[id^="postcontentandsubject"] > br {
+  display: none !important;
+}
+
+[id^="postcontentandsubject"] > div:first-child {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* Emoji/sticker images — inline, not oversized */
@@ -1314,7 +1423,7 @@ tr.postrow > .c2 h3[id^="postsubject"]:not(:empty) {
 /* Content images — half size with subtle rounding */
 .postcontent img:not([src="about:blank"]):not(.medalimg):not(.avatar):not([src*="smile"]):not(.smile_a2) {
   border-radius: 10px !important;
-  max-width: 50% !important;
+  max-width: min(360px, 100%) !important;
   min-width: 0 !important;
   min-height: 0 !important;
   height: auto !important;
@@ -1322,9 +1431,37 @@ tr.postrow > .c2 h3[id^="postsubject"]:not(:empty) {
   outline: none !important;
   outline-offset: 0 !important;
 }
+
+.postcontent a:has(> img:not([src="about:blank"]):not(.medalimg):not(.avatar):not([src*="smile"]):not(.smile_a2)) {
+  display: block !important;
+  width: fit-content !important;
+  max-width: min(360px, 100%) !important;
+  height: auto !important;
+  line-height: normal !important;
+  margin: 10px 0 !important;
+  overflow: visible !important;
+  text-align: left !important;
+  vertical-align: baseline !important;
+  background: transparent !important;
+}
+
+.postcontent a:has(> img:not([src="about:blank"]):not(.medalimg):not(.avatar):not([src*="smile"]):not(.smile_a2)) > img {
+  display: block !important;
+  width: 100% !important;
 }
 
 /* Tables in post — prevent overflow */
+/* Expand NGA auto-clipped long UBB content */
+.postcontent[style*="max-height"],
+.postcontent .ubbcode[style*="max-height"],
+[id^="postcontent"]:not([id^="postcontentandsubject"])[style*="max-height"],
+[id^="postcontent"]:not([id^="postcontentandsubject"]) .ubbcode[style*="max-height"],
+.comment_c .ubbcode[style*="max-height"] {
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Tables in post */
 .postcontent table {
   max-width: 100% !important;
   overflow-x: auto !important;
@@ -1366,6 +1503,11 @@ tr.postrow > .c2 h3[id^="postsubject"]:not(:empty) {
   text-align: left !important;
 }
 
+.postcontent .quote.left:has(> a[title*="原图"] > img),
+.comment_c .quote.left:has(> a[title*="原图"] > img) {
+  display: none !important;
+}
+
 /* Quote action buttons (+, R) */
 .postcontent .quote > a.block_txt {
   display: inline-flex !important;
@@ -1375,11 +1517,20 @@ tr.postrow > .c2 h3[id^="postsubject"]:not(:empty) {
   height: auto !important;
   padding: 1px 5px !important;
   margin: 0 2px 0 0 !important;
+  background: var(--nga-card-bg) !important;
+  color: var(--nga-text-secondary) !important;
+  border: 1px solid var(--nga-border) !important;
   border-radius: 4px !important;
   font-size: 11px !important;
   font-weight: 600 !important;
   vertical-align: baseline !important;
   line-height: 1.2 !important;
+}
+
+.postcontent .quote > a.block_txt:hover {
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+  border-color: var(--nga-tag-blue-text) !important;
 }
 
 /* Spoiler/collapse blocks */
@@ -1610,10 +1761,17 @@ a.contentFullWidthButton:hover {
 
 /* Comment content text */
 .comment_c .ubbcode,
-.comment_c [id^="postcontent"] {
-  padding: 4px 0 !important;
+.comment_c [id^="postcontent"]:not([id^="postcontentandsubject"]) {
+  display: block !important;
+  padding: 4px 0 4px var(--nga-post-indent) !important;
   font-size: 13px !important;
   line-height: 1.65 !important;
+  text-indent: 0 !important;
+}
+
+.comment_c [id^="postcontentandsubject"] {
+  display: block !important;
+  padding: 0 !important;
 }
 
 /* Comment images */
@@ -1623,6 +1781,24 @@ a.contentFullWidthButton:hover {
   height: auto !important;
   border-radius: 6px !important;
   margin: 4px 0 !important;
+}
+
+.comment_c a:has(> img:not([src="about:blank"]):not([src*="smile"]):not(.smile_a2)) {
+  display: block !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  height: auto !important;
+  line-height: normal !important;
+  margin: 4px 0 !important;
+  overflow: visible !important;
+  text-align: left !important;
+  vertical-align: baseline !important;
+  background: transparent !important;
+}
+
+.comment_c a:has(> img:not([src="about:blank"]):not([src*="smile"]):not(.smile_a2)) > img {
+  display: block !important;
+  width: 100% !important;
 }
 
 /* Comment action links */
@@ -1925,11 +2101,21 @@ span[id^="postcomment"] a.silver:hover {
   height: auto !important;
   padding: 1px 5px !important;
   margin: 0 2px 0 0 !important;
+  background: var(--nga-card-bg) !important;
+  color: var(--nga-text-secondary) !important;
+  border: 1px solid var(--nga-border) !important;
   border-radius: 4px !important;
   font-size: 10px !important;
   font-weight: 600 !important;
   vertical-align: baseline !important;
   line-height: 1.2 !important;
+}
+
+.comment_c_2 .quote > a.block_txt:hover,
+.comment_c_3 .quote > a.block_txt:hover {
+  background: var(--nga-tag-blue-bg) !important;
+  color: var(--nga-tag-blue-text) !important;
+  border-color: var(--nga-tag-blue-text) !important;
 }
 
 /* ===========================

@@ -15,7 +15,10 @@ export default defineContentScript({
     const COMMENT_CONTAINER_SELECTOR = '.comment_c';
     const ENABLED_KEY = 'nga-alpha-enabled';
     const THEME_KEY = 'nga-alpha-theme';
+    const LIGHT_THEME_PALETTE_CACHE_KEY = 'nga-alpha-light-theme-palette';
+    const LIGHT_THEME_PALETTE_STORAGE_KEY = 'lightThemePalette';
     type Theme = 'light' | 'dark';
+    type LightThemePalette = 'blue' | 'brown' | 'gray' | 'pink';
 
     let style: HTMLStyleElement | null = null;
     let observer: MutationObserver | null = null;
@@ -60,8 +63,35 @@ export default defineContentScript({
       localStorage.setItem(ENABLED_KEY, String(enabled));
     }
 
+    function normalizeTheme(value: unknown): Theme {
+      return value === 'dark' ? 'dark' : 'light';
+    }
+
     function getTheme(): Theme {
-      return (localStorage.getItem(THEME_KEY) as Theme) || 'light';
+      return normalizeTheme(localStorage.getItem(THEME_KEY));
+    }
+
+    function normalizeLightThemePalette(value: unknown): LightThemePalette {
+      if (value === 'brown' || value === 'gray' || value === 'pink') {
+        return value;
+      }
+
+      return 'blue';
+    }
+
+    function getLightThemePalette(): LightThemePalette {
+      return normalizeLightThemePalette(
+        localStorage.getItem(LIGHT_THEME_PALETTE_CACHE_KEY),
+      );
+    }
+
+    function setCachedLightThemePalette(palette: LightThemePalette) {
+      localStorage.setItem(LIGHT_THEME_PALETTE_CACHE_KEY, palette);
+    }
+
+    function applyLightThemePalette(palette: LightThemePalette) {
+      setCachedLightThemePalette(palette);
+      document.documentElement.setAttribute('data-nga-light-palette', palette);
     }
 
     function applyTheme(theme: Theme) {
@@ -71,6 +101,7 @@ export default defineContentScript({
 
     function removeTheme() {
       document.documentElement.removeAttribute('data-nga-theme');
+      document.documentElement.removeAttribute('data-nga-light-palette');
     }
 
     // -- Floating Toolbar --
@@ -363,6 +394,7 @@ export default defineContentScript({
     function enable() {
       isEnabled = true;
       injectCSS();
+      applyLightThemePalette(getLightThemePalette());
       applyTheme(getTheme());
       scheduleDomFeatures();
       console.log('[NGA Alpha] Enabled');
@@ -381,7 +413,18 @@ export default defineContentScript({
 
     // -- Listen for toggle from popup --
 
-    browser.storage.onChanged.addListener((changes) => {
+    browser.storage.onChanged.addListener((changes, areaName) => {
+      if (areaName !== 'local') return;
+
+      if (changes.lightThemePalette) {
+        const palette = normalizeLightThemePalette(changes.lightThemePalette.newValue);
+        setCachedLightThemePalette(palette);
+
+        if (isEnabled) {
+          applyLightThemePalette(palette);
+        }
+      }
+
       if (changes.enabled) {
         if (changes.enabled.newValue === false) {
           setCachedEnabled(false);
@@ -401,19 +444,31 @@ export default defineContentScript({
         enable();
       }
 
-      browser.storage.local.get('enabled').then((result) => {
-        const enabled = result.enabled !== false;
-        setCachedEnabled(enabled);
+      browser.storage.local
+        .get(['enabled', LIGHT_THEME_PALETTE_STORAGE_KEY])
+        .then((result) => {
+          const lightThemePalette = normalizeLightThemePalette(
+            result.lightThemePalette,
+          );
+          setCachedLightThemePalette(lightThemePalette);
 
-        if (!enabled) {
-          disable();
-          console.log('[NGA Alpha] Content script loaded (disabled)');
-          return;
-        }
+          const enabled = result.enabled !== false;
+          setCachedEnabled(enabled);
 
-        enable();
-        console.log('[NGA Alpha] Content script loaded, theme:', getTheme());
-      });
+          if (!enabled) {
+            disable();
+            console.log('[NGA Alpha] Content script loaded (disabled)');
+            return;
+          }
+
+          enable();
+          console.log(
+            '[NGA Alpha] Content script loaded, theme:',
+            getTheme(),
+            'light palette:',
+            lightThemePalette,
+          );
+        });
     }
 
     init();

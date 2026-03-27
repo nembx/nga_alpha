@@ -1,62 +1,195 @@
 .popup-container {
-  width: 280px;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #ffffff;
-  color: #1a1a1a;
+  width: 336px;
+  padding: 18px;
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 34%),
+    linear-gradient(180deg, #f8fbff 0%, #f3f5f8 100%);
+  color: #111827;
+}
+
+.popup-header {
+  margin-bottom: 14px;
 }
 
 .popup-title {
-  margin: 0 0 4px;
-  font-size: 20px;
+  margin: 0;
+  font-size: 22px;
   font-weight: 700;
-  color: #2563eb;
+  letter-spacing: 0.01em;
+  color: #1d4ed8;
 }
 
 .popup-desc {
-  margin: 0 0 16px;
+  margin: 4px 0 0;
   font-size: 13px;
-  color: #6b7280;
+  color: #64748b;
+}
+
+.popup-card {
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(8px);
 }
 
 .popup-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  background: #f3f4f6;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 14px;
+  gap: 12px;
+}
+
+.card-label {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.toggle-state {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
 }
 
 .toggle-btn {
-  padding: 6px 16px;
-  border: none;
-  border-radius: 6px;
+  min-width: 68px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #dbe2ea;
+  color: #64748b;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  background: #d1d5db;
-  color: #6b7280;
-  transition: all 0.2s;
-}
-
-.toggle-btn.active {
-  background: #2563eb;
-  color: #ffffff;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 .toggle-btn:hover {
-  opacity: 0.85;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(148, 163, 184, 0.22);
 }
 
-.popup-info {
+.toggle-btn.active {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.24);
+}
+
+.card-head {
+  margin-bottom: 12px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.card-subtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.palette-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #d8e0ea;
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.palette-option:hover {
+  transform: translateY(-1px);
+  border-color: #93c5fd;
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.12);
+}
+
+.palette-option.active {
+  border-color: #2563eb;
+  background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.14);
+}
+
+.palette-swatch {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.palette-blue {
+  background: linear-gradient(135deg, #dbeafe 0%, #ffffff 100%);
+}
+
+.palette-brown {
+  background: linear-gradient(135deg, #f2dfcf 0%, #fffaf4 100%);
+}
+
+.palette-gray {
+  background: linear-gradient(135deg, #e5e7eb 0%, #ffffff 100%);
+}
+
+.palette-pink {
+  background: linear-gradient(135deg, #fce7f3 0%, #fffafe 100%);
+}
+
+.palette-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.palette-copy strong {
+  font-size: 14px;
+  color: #111827;
+}
+
+.palette-copy small {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.popup-tip {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+.popup-summary {
+  margin: 2px 0 0;
   text-align: center;
   font-size: 12px;
-  color: #9ca3af;
-}
-
-.popup-info p {
-  margin: 0;
+  color: #94a3b8;
 }

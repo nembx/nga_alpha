@@ -13,6 +13,8 @@ export default defineContentScript({
     const POST_CONTENT_SELECTOR = `.postcontent, ${POST_CONTENT_ID_SELECTOR}`;
     const POST_CONTENT_WRAPPER_SELECTOR = '[id^="postcontentandsubject"]';
     const COMMENT_CONTAINER_SELECTOR = '.comment_c';
+    const HOT_REPLY_SECTION_SELECTOR =
+      '[id^="hightlight_for_"], [id^="highlight_for_"]';
     const ENABLED_KEY = 'nga-alpha-enabled';
     const THEME_KEY = 'nga-alpha-theme';
     const LIGHT_THEME_PALETTE_CACHE_KEY = 'nga-alpha-light-theme-palette';
@@ -163,6 +165,7 @@ export default defineContentScript({
         'iframe[src*="ad"]',
         'div[id*="ad_"]',
         'div[class*="advertisement"]',
+        HOT_REPLY_SECTION_SELECTOR,
       ];
       selectors.forEach((sel) => {
         document.querySelectorAll(sel).forEach((el) => {
@@ -181,6 +184,7 @@ export default defineContentScript({
         'iframe[src*="ad"]',
         'div[id*="ad_"]',
         'div[class*="advertisement"]',
+        HOT_REPLY_SECTION_SELECTOR,
       ];
       selectors.forEach((sel) => {
         document.querySelectorAll(sel).forEach((el) => {
